@@ -14,9 +14,7 @@ PROJECT OVERVIEW
 
 Quantitative spatial-temporal analysis of snow cover dynamics and surface 
 energy fluxes across 23 districts in northern Pakistan using ERA5-Land monthly 
-data (January 2015 - March 2025).
-
-Data Source: ERA5-Land Monthly Averaged (ECMWF Copernicus)
+data (January 2015 - March 2025)
 Study Area: Northern Pakistan (23 districts)
 Temporal Coverage: 123 months
 Analysis Period: 2015-2025
@@ -146,22 +144,6 @@ Software Stack:
 - PySAL (esda, libpysal, spreg)
 - matplotlib, seaborn
 
-Key Features:
-- 20+ interactive Plotly visualizations
-- Automated district-level extraction loop
-- Dynamic time series with uncertainty bands
-- Spatial weights matrices (KNN k=4)
-- Climate projection-style plots
-- Animated choropleth with temporal slider
-- Multi-panel comparison maps
-
-Notebook Structure:
-1. Data Loading (ERA5-Land NetCDF + shapefiles)
-2. Spatial Processing (clipping, aggregation)
-3. Temporal Analysis (time series, differencing)
-4. Spatial Statistics (Moran's I, LISA, regression)
-5. Visualization (20+ figures)
-6. Results Summary (tables, interpretation)
 
 ================================================================================
 OUTPUTS
@@ -210,20 +192,6 @@ FUTURE RESEARCH DIRECTIONS
 6. Climate Scenarios
    RCP/SSP projections to 2050 for adaptation planning
 
-================================================================================
-REFERENCES
-================================================================================
-
-Data Citation:
-Muñoz Sabater, J. (2019). ERA5-Land monthly averaged data from 1950 to 
-present. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). 
-DOI: 10.24381/cds.68d2bb30
-
-Methodology:
-- Anselin, L. (1995). Local Indicators of Spatial Association—LISA. 
-  Geographical Analysis, 27(2), 93-115.
-- Moran, P.A.P. (1950). Notes on continuous stochastic phenomena. 
-  Biometrika, 37(1/2), 17-23.
 
 ================================================================================
 CONTACT & COLLABORATION

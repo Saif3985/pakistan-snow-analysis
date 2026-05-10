@@ -7,6 +7,9 @@
 ![Northern Pakistan Districts](snow_northern.png)
 
 ---
+![Northern Pakistan Districts](timeseries .png)
+
+---
 
 ## 📖 Overview
 

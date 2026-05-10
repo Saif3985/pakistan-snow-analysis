@@ -4,11 +4,13 @@
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+![Northern Pakistan Districts](snow_northern.png)
+
 ---
 
 ## 📖 Overview
 
-Comprehensive spatial-temporal analysis of snow cover dynamics and surface energy fluxes across 23 districts in northern Pakistan using ERA5-Land monthly data (2015-2025). This study quantifies climate change impacts on regional snow hydrology through advanced geospatial statistics and interactive visualizations.
+Comprehensive spatial-temporal analysis of snow cover dynamics and surface energy fluxes across 23 districts in northern Pakistan. This study quantifies climate change impacts on regional snow hydrology through advanced geospatial statistics and interactive visualizations.
 
 ### Key Results
 - **15-20% decadal snow depth reduction** in high-elevation central districts (Gilgit, Nagar)
@@ -20,7 +22,7 @@ Comprehensive spatial-temporal analysis of snow cover dynamics and surface energ
 
 ## 🎯 Research Objectives
 
-1. Quantify snow cover metrics using high-resolution ERA5-Land data
+1. Quantify snow cover metrics using high-resolution data
 2. Analyze spatial autocorrelation and identify hotspot districts
 3. Assess relationships between snow dynamics and surface energy fluxes
 4. Evaluate climate change impacts on regional water resources
@@ -29,10 +31,6 @@ Comprehensive spatial-temporal analysis of snow cover dynamics and surface energ
 
 ## 📊 Methodology
 
-### Data Sources
-- **Climate Data**: ERA5-Land Monthly Averaged (ECMWF Copernicus)
-- **Spatial Data**: Northern Pakistan administrative boundaries (23 districts)
-- **Temporal Range**: 123 months (January 2015 - March 2025)
 
 ### Variables Analyzed
 **Snow Metrics**: Cover (%), Snowfall (m), Snowmelt (m), Depth (m)  
@@ -202,7 +200,7 @@ spreg>=1.2.0
 ```
 
 ### Notebook Structure
-1. **Data Loading**: ERA5-Land NetCDF + district shapefiles
+1. **Data Loading**
 2. **Spatial Processing**: Clipping, aggregation, differencing
 3. **Temporal Analysis**: Time series with uncertainty quantification
 4. **Spatial Statistics**: Moran's I, LISA, regression
@@ -247,20 +245,6 @@ The notebook contains 20+ publication-quality visualizations:
 
 All visualizations are interactive (Plotly) with hover details, zoom, and export capabilities.
 
----
-
-## 📚 References
-
-### Data Citation
-```
-Muñoz Sabater, J. (2019). ERA5-Land monthly averaged data from 1950 to present. 
-Copernicus Climate Change Service (C3S) Climate Data Store (CDS). 
-DOI: 10.24381/cds.68d2bb30
-```
-
-### Methodology
-- Anselin, L. (1995). Local Indicators of Spatial Association—LISA. *Geographical Analysis*, 27(2), 93-115.
-- Moran, P.A.P. (1950). Notes on continuous stochastic phenomena. *Biometrika*, 37(1/2), 17-23.
 
 ---
 
@@ -287,18 +271,6 @@ Contributions welcome! Areas of interest:
 
 Please fork, create feature branch, and submit pull request.
 
----
-
-## 📄 License
-
-MIT License - See [LICENSE](LICENSE) file
-
-```
-Copyright (c) 2025 Saif Ullah
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files...
-```
 
 ---
 
@@ -313,10 +285,8 @@ of this software and associated documentation files...
 
 ## 🙏 Acknowledgments
 
-- **ECMWF Copernicus** for ERA5-Land data provision
 - **Pakistan Meteorological Department** for regional insights
 - **Open-source community**: GeoPandas, PySAL, Plotly developers
-- **Research funding**: [Grant/Funding source if applicable]
 
 ---
 
@@ -356,8 +326,3 @@ If you use this analysis in your research, please cite:
 
 ---
 
-## 🔗 Related Projects
-
-- [ERA5-Land Data Processing Tools](https://github.com/example/era5-tools)
-- [South Asia Climate Analysis](https://github.com/example/sa-climate)
-- [Mountain Hydrology Toolkit](https://github.com/example/mountain-hydro)

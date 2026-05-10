@@ -322,7 +322,6 @@ If you use this analysis in your research, please cite:
 
 *Last Updated: May 2025*  
 *Version: 1.0*  
-*DOI: [Add DOI if archived on Zenodo]*
 
 ---
 

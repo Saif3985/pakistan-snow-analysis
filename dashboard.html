@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow Cover Analysis Dashboard - Northern Pakistan</title>
+    <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-card .change {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .chart-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 2rem;
+            margin: 3rem 0 1rem 0;
+            text-align: center;
+        }
+        
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .finding-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .finding-card h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .finding-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .finding-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .finding-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .footer {
+            background: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+        
+        .badge-warning {
+            background: #fbbf24;
+            color: #78350f;
+        }
+        
+        .badge-success {
+            background: #34d399;
+            color: #065f46;
+        }
+        
+        .badge-info {
+            background: #60a5fa;
+            color: #1e3a8a;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #f8f9fa;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏔️ Snow Cover & Energy Flux Analysis</h1>
+        <p>Northern Pakistan (2015-2025) | ERA5-Land Data Analysis</p>
+        <p style="margin-top: 0.5rem;">
+            <span class="badge badge-info">23 Districts</span>
+            <span class="badge badge-info">123 Months</span>
+            <span class="badge badge-info">Spatial Clustering Detected</span>
+        </p>
+    </div>
+
+    <div class="container">
+        <!-- Key Statistics -->
+        <h2 class="section-title">📊 Key Statistics (2020-2024)</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Moran's I (Snowfall)</h3>
+                <div class="value">0.42</div>
+                <div class="change">p = 0.003 ⭐ Significant</div>
+            </div>
+            <div class="stat-card">
+                <h3>Districts Analyzed</h3>
+                <div class="value">23</div>
+                <div class="change">Northern Pakistan</div>
+            </div>
+            <div class="stat-card">
+                <h3>Snow Depth Loss</h3>
+                <div class="value">-9,241%</div>
+                <div class="change">Nagar & Gilgit (Extreme)</div>
+            </div>
+            <div class="stat-card">
+                <h3>Correlation (Snow-Energy)</h3>
+                <div class="value">r = 0.89</div>
+                <div class="change">Snowfall ↔ Snowmelt</div>
+            </div>
+        </div>
+
+        <!-- Summary Statistics Table -->
+        <div class="chart-container">
+            <h3 class="chart-title">Summary Statistics (2020-2024)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Mean</th>
+                        <th>Std Dev</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                        <th>Unit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Snow Cover</td>
+                        <td>-1.80</td>
+                        <td>0.91</td>
+                        <td>-3.93</td>
+                        <td>-0.10</td>
+                        <td>%</td>
+                    </tr>
+                    <tr>
+                        <td>Snowfall</td>
+                        <td>-1.00</td>
+                        <td>0.54</td>
+                        <td>-2.09</td>
+                        <td>-0.10</td>
+                        <td>m × 10⁴</td>
+                    </tr>
+                    <tr>
+                        <td>Snowmelt</td>
+                        <td>-0.66</td>
+                        <td>0.47</td>
+                        <td>-1.84</td>
+                        <td>0.07</td>
+                        <td>m × 10⁴</td>
+                    </tr>
+                    <tr>
+                        <td>Latent Heat Flux</td>
+                        <td>-67,700</td>
+                        <td>28,760</td>
+                        <td>-117,299</td>
+                        <td>5,062</td>
+                        <td>J/m²</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Interactive Charts -->
+        <h2 class="section-title">📈 Interactive Visualizations</h2>
+        
+        <div class="chart-container">
+            <h3 class="chart-title">District Rankings: Snowmelt Change</h3>
+            <div id="barChart"></div>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="chart-title">Temporal Trends (2016-2025)</h3>
+            <div id="timeSeriesChart"></div>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="chart-title">Correlation Matrix</h3>
+            <div id="heatmapChart"></div>
+        </div>
+
+        <!-- Key Findings -->
+        <h2 class="section-title">🔍 Key Findings</h2>
+        <div class="findings-grid">
+            <div class="finding-card">
+                <h4>🌍 Spatial Clustering</h4>
+                <ul>
+                    <li><strong>Snowfall:</strong> I = 0.42 (p < 0.01)</li>
+                    <li><strong>Snowmelt:</strong> I = 0.21 (p < 0.05)</li>
+                    <li><strong>Pattern:</strong> Not random distribution</li>
+                </ul>
+            </div>
+            
+            <div class="finding-card">
+                <h4>❄️ Extreme Changes</h4>
+                <ul>
+                    <li><strong>Nagar:</strong> -9,241% snow depth</li>
+                    <li><strong>Gilgit:</strong> -9,241% snow depth</li>
+                    <li><strong>Diamir:</strong> -2,241% snow depth</li>
+                </ul>
+            </div>
+            
+            <div class="finding-card">
+                <h4>⚡ Energy-Snow Coupling</h4>
+                <ul>
+                    <li><strong>Snowfall-Snowmelt:</strong> r = 0.89</li>
+                    <li><strong>Latent-Solar:</strong> r = -0.89</li>
+                    <li><strong>Model R²:</strong> 0.25</li>
+                </ul>
+            </div>
+            
+            <div class="finding-card">
+                <h4>📊 Period Comparison</h4>
+                <ul>
+                    <li><strong>2015-2019:</strong> Western high snowfall</li>
+                    <li><strong>2020-2024:</strong> Eastern shift</li>
+                    <li><strong>Change:</strong> Pattern reversal</li>
+                </ul>
+            </div>
+            
+            <div class="finding-card">
+                <h4>🚨 Priority Districts</h4>
+                <ul>
+                    <li><strong>Gilgit:</strong> Extreme loss + hotspot</li>
+                    <li><strong>Hattian Bala:</strong> -1.84 × 10⁴ snowmelt</li>
+                    <li><strong>Muzaffarabad:</strong> High vulnerability</li>
+                </ul>
+            </div>
+            
+            <div class="finding-card">
+                <h4>💧 Water Resources</h4>
+                <ul>
+                    <li><strong>80%:</strong> Reduced snowmelt</li>
+                    <li><strong>Impact:</strong> Indus River system</li>
+                    <li><strong>Risk:</strong> Agricultural water stress</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- LISA Results -->
+        <div class="chart-container">
+            <h3 class="chart-title">LISA Hotspots (p < 0.05)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>District</th>
+                        <th>Cluster Type</th>
+                        <th>p-value</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lower Dir (Temergara)</td>
+                        <td>High-High</td>
+                        <td>0.015</td>
+                        <td>High snowmelt, high neighbors</td>
+                    </tr>
+                    <tr>
+                        <td>Upper Dir</td>
+                        <td>High-High</td>
+                        <td>0.028</td>
+                        <td>High snowmelt, high neighbors</td>
+                    </tr>
+                    <tr>
+                        <td>Diamir (At Chilas)</td>
+                        <td>High-Low</td>
+                        <td>0.022</td>
+                        <td>Isolated high snowmelt</td>
+                    </tr>
+                    <tr>
+                        <td>Muzaffarabad</td>
+                        <td>Low-Low</td>
+                        <td>0.003</td>
+                        <td>Low snowmelt, low neighbors</td>
+                    </tr>
+                    <tr>
+                        <td>Neelum</td>
+                        <td>Low-Low</td>
+                        <td>0.023</td>
+                        <td>Low snowmelt, low neighbors</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Author:</strong> Saif Ullah</p>
+        <p>
+            <a href="https://github.com/Saif3985" target="_blank">GitHub</a> |
+            <a href="https://www.linkedin.com/in/saifullah-ds" target="_blank">LinkedIn</a> |
+            <a href="mailto:saifullahct5@gmail.com">Email</a>
+        </p>
+        <p style="margin-top: 1rem; color: #666;">
+            Data: ERA5-Land (ECMWF) | Analysis Period: 2015-2025 | MIT License
+        </p>
+    </div>
+
+    <script>
+        // District Rankings Bar Chart
+        const districts = [
+            'Chitral', 'Bajaur', 'Upper Dir', 'Hunza', 'Shigar', 'Torghar', 
+            'Swat', 'Lower Dir', 'Kohistan', 'Ghizer', 'Ghanche', 'Nagar',
+            'Neelum', 'Mansehra', 'Diamir', 'Shangla', 'Baltistan', 'Batagram',
+            'Astore', 'Kharmang', 'Gilgit', 'Muzaffarabad', 'Hattian Bala'
+        ];
+        
+        const snowmeltChanges = [
+            0.074, -0.096, -0.191, -0.203, -0.289, -0.320, -0.348, -0.412,
+            -0.473, -0.492, -0.538, -0.672, -0.729, -0.782, -0.889, -0.916,
+            -0.973, -1.000, -1.126, -1.394, -1.475, -1.837, -1.837
+        ];
+
+        const barTrace = {
+            x: districts,
+            y: snowmeltChanges,
+            type: 'bar',
+            marker: {
+                color: snowmeltChanges.map(v => v > 0 ? '#34d399' : '#ef4444'),
+            },
+            text: snowmeltChanges.map(v => v.toFixed(3)),
+            textposition: 'outside',
+        };
+
+        const barLayout = {
+            xaxis: { title: 'District', tickangle: -45 },
+            yaxis: { title: 'Snowmelt Change (m × 10⁴)' },
+            height: 500,
+            margin: { b: 150 }
+        };
+
+        Plotly.newPlot('barChart', [barTrace], barLayout);
+
+        // Time Series Chart
+        const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+        
+        const snowCoverData = {
+            x: years,
+            y: [-6, 1, 3, 5, -4, -2, 2, 3, -4],
+            name: 'Snow Cover',
+            mode: 'lines+markers',
+            line: { color: '#3b82f6', width: 3 }
+        };
+        
+        const snowfallData = {
+            x: years,
+            y: [-4, 3, -3, 5, -2, -2, 1, -3, 5],
+            name: 'Snowfall',
+            mode: 'lines+markers',
+            line: { color: '#f59e0b', width: 3 }
+        };
+        
+        const snowmeltData = {
+            x: years,
+            y: [0, -1, -3, 5, -1, -1, -3, -5, 3],
+            name: 'Snowmelt',
+            mode: 'lines+markers',
+            line: { color: '#10b981', width: 3 }
+        };
+
+        const timeSeriesLayout = {
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Change' },
+            height: 500,
+            hovermode: 'x unified'
+        };
+
+        Plotly.newPlot('timeSeriesChart', [snowCoverData, snowfallData, snowmeltData], timeSeriesLayout);
+
+        // Correlation Heatmap
+        const variables = ['Snow Cover', 'Snowfall', 'Snowmelt', 'Latent Heat', 'Solar Rad', 'Snow Depth'];
+        const corrMatrix = [
+            [1.00, -0.19, 0.03, -0.52, 0.16, 0.88],
+            [-0.19, 1.00, 0.89, 0.70, -0.64, -0.43],
+            [0.03, 0.89, 1.00, 0.41, -0.37, -0.13],
+            [-0.52, 0.70, 0.41, 1.00, -0.89, -0.66],
+            [0.16, -0.64, -0.37, -0.89, 1.00, 0.43],
+            [0.88, -0.43, -0.13, -0.66, 0.43, 1.00]
+        ];
+
+        const heatmapTrace = {
+            z: corrMatrix,
+            x: variables,
+            y: variables,
+            type: 'heatmap',
+            colorscale: 'RdBu',
+            zmid: 0,
+            text: corrMatrix.map(row => row.map(val => val.toFixed(2))),
+            texttemplate: '%{text}',
+            textfont: { size: 11 },
+            colorbar: { title: 'Correlation' }
+        };
+
+        const heatmapLayout = {
+            height: 500,
+            xaxis: { side: 'bottom' },
+            yaxis: { autorange: 'reversed' }
+        };
+
+        Plotly.newPlot('heatmapChart', [heatmapTrace], heatmapLayout);
+    </script>
+</body>
+</html>

@@ -4,6 +4,14 @@
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+## 📊 Live Dashboard
+
+**[Click here to view interactive dashboard →](https://saif3985.github.io/pakistan-snow-analysis/dashboard.html)**
+
+Explore real-time visualizations, district rankings, correlation matrices, and temporal trends.
+
+---
+
 ![Northern Pakistan Districts](snow_northern.png)
 
 ---
